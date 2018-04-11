@@ -18,19 +18,7 @@ routers:
   servers:
   - port: 4142
     ip: 0.0.0.0
-    # tls:
-    #   # caCertPath: /run/secrets/linkerd.cacert
-    #   certPath: /run/secrets/linkerd.cert
-    #   keyPath: /run/secrets/linkerd.key
-    #   # requireClientAuth: true
   dstPrefix: /grpc
   identifier:
     kind: io.l5d.header.path
     segments: 2
-  # client:
-  #   forwardClientCert: true
-    # tls:
-    #   commonName: linkerd
-    #   clientAuth:
-    #     certPath: /run/secrets/linkerd.cert
-    #     keyPath: /run/secrets/linkerd.key
