@@ -2,6 +2,13 @@
 
 The repository demonstrates on how to do a simple linker-to-service load balancing.
 
+To view other configuration, just switch to other branches. The curret examples available are:
+
+- linker-to-linker-no-tls (through namerd)
+- linker-to-service-no-tls
+- linker-to-service-through-namerd
+- master (linker-to-service example)
+
 ## Proto Example
 
 ```protobuf
