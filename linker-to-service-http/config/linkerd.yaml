@@ -1,0 +1,38 @@
+admin:
+  port: 9990
+  ip: 0.0.0.0
+
+routers:
+- protocol: http
+  label: http
+  dtab: |
+    /svc/web => /$/inet/web/3000
+  identifier:
+    kind: io.l5d.header.token
+  servers:
+  - port: 4140
+    ip: 0.0.0.0
+  service:
+    # Allows 5XX Errors to be retried
+    responseClassifier:
+      kind: io.l5d.http.retryableRead5XX
+    retries:
+      # `retry budget` determines how many failed requests are eligible to be retried
+      budget:
+        minRetriesPerSec: 5
+        percentCanRetry: 0.5
+        ttlSecs: 15
+      # `retry backoff` determines which backoff algorithm to use
+      backoff:
+        kind: jittered
+        minMs: 10
+        maxMs: 1000
+  client:
+    failureAccrual:
+      kind: io.l5d.successRate
+      successRate: 0.9
+      requests: 1000
+      backoff:
+        kind: jittered
+        minMs: 5000
+        maxMs: 10000
