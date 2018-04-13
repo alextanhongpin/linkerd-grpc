@@ -1,0 +1,22 @@
+admin:
+  ip: 0.0.0.0
+  port: 9991
+
+# Uncomment to enable in-memory storage. NOTE: Don't use this in production!
+storage:
+  kind: io.l5d.inMemory
+  namespaces:
+    default: |
+      /srv/Echo => /$/inet/server/50051; 
+      /svc => /$/io.buoyant.http.domainToPathPfx/srv; # /grpc/echo.Echo -> /srv/Echo/echo
+
+interfaces:
+  # used by linkerds to receive updates
+  - kind: io.l5d.thriftNameInterpreter
+    ip: 0.0.0.0
+    port: 4100
+
+  # used by `namerctl` to manage configuration
+  - kind: io.l5d.httpController
+    ip: 0.0.0.0
+    port: 4180

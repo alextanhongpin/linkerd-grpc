@@ -1,0 +1,27 @@
+# linkerd config for linker-to-linker mode
+# routes from port 4140 on source node to 4141 on destination node
+
+admin:
+  ip: 0.0.0.0
+  port: 9990
+
+usage:
+  orgId: alextanhongpin
+  enabled: false
+
+routers:
+- protocol: h2
+  label: h2-ingress
+  # dtab: |
+  #   /srv/Echo => /$/inet/server/50051; 
+  #   /grpc => /$/io.buoyant.http.domainToPathPfx/srv; # /grpc/echo.Echo -> /srv/Echo/echo
+  servers:
+  - port: 4140
+    ip: 0.0.0.0
+  identifier:
+    kind: io.l5d.header.path
+    segments: 2
+  interpreter:
+    kind: io.l5d.namerd
+    dst: /$/inet/namerd/4100
+    namespace: default

@@ -1,10 +1,6 @@
 # linkerd-grpc
 
-The repository demonstrates on how to do a simple linker-to-service load balancing:
-
-- linker-to-linker-no-tls (through namerd)
-- linker-to-service
-- linker-to-service-through-namerd
+The repository demonstrates on how to do a simple linker-to-service load balancing.
 
 ## Proto Example
 
